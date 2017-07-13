@@ -2,7 +2,7 @@
     package="com.example.jmzamora_videoteca">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
@@ -29,6 +29,16 @@
         <activity android:name=".ActividadDetalles" />
         <activity android:name=".PlaybackOverlayActivity" />
         <activity android:name=".DialogPassword" />
+
+        <receiver
+            android:name=".BootupActivity"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".UpdateRecommendationsService" android:enabled="true" />
     </application>
 
 </manifest>
