@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gradient_end">
+
+
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="Protección"
+        android:textColor="@color/lb_basic_card_bg_color"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/info_text"
+        android:layout_marginBottom="10dp"
+
+        android:layout_marginTop="10dp"
+        android:background="@color/search_opaque" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:padding="5dp"
+        android:text="Contraseña:"
+        android:textColor="@color/lb_background_protection"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/contrasena_input"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="Introduzca contraseña"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/background_gradient_start" />
+
+
+    <Button
+        android:id="@+id/save_password"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contrasena_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Guardar"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/get_password"
+        android:visibility="gone"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contrasena_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Aceptar"
+        android:textColor="@android:color/white" />
+</RelativeLayout>
