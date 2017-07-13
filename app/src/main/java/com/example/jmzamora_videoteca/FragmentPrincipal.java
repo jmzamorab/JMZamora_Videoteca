@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
-import android.support.v17.leanback.widget.DetailsOverviewRowPresenter;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.ListRow;
@@ -22,6 +21,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +77,7 @@ public class FragmentPrincipal extends BrowseFragment {
         setHeadersTransitionOnBackEnabled(true);
         setBrandColor(getResources()
                 .getColor(R.color.fastlane_background));
+        setSearchAffordanceColor(getResources().getColor(R.color.search_opaque));
     }
 
     private void cargarListas() {
@@ -146,6 +147,12 @@ public class FragmentPrincipal extends BrowseFragment {
 
     private void setupEventListeners() {
         setOnItemViewClickedListener(new ItemViewClickedListener());
+        setOnSearchClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Implementar la busqueda aquí", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private String getContentFromPref() {
@@ -177,7 +184,7 @@ public class FragmentPrincipal extends BrowseFragment {
         this.action = action;
         Intent i = new Intent(getContext(), DialogPassword.class);
         i.putExtra("action", action);
-      startActivityForResult(i, request_code);
+        startActivityForResult(i, request_code);
     }
 
     @Override
@@ -188,31 +195,29 @@ public class FragmentPrincipal extends BrowseFragment {
             Log.wtf("** VIDEOTECA **", "onActivityResult - Correcto, y he obtenido " + Password);
         }
 
-            Log.wtf("** VIDEOTECA **", "onActivityResult - Passwor con contenido " + Password);
-            switch (this.action) {
-                case IS_OK_PWD:
-                    if (!Password.isEmpty()) {
-                        if (isCorrectPwd(Password)) {
-                            Log.wtf("** VIDEOTECA **", "onActivityResult - Passwor Correcta, muestro peli");
-                            openFilm();
-                        } else {
-                            Toast.makeText(getContext(), "Contraseña Incorrecta", Toast.LENGTH_LONG).show();
-                            Log.wtf("** VIDEOTECA **", "onActivityResult - Passwor INCorrecta, muestro ERROR");
-                        }
+        Log.wtf("** VIDEOTECA **", "onActivityResult - Passwor con contenido " + Password);
+        switch (this.action) {
+            case IS_OK_PWD:
+                if (!Password.isEmpty()) {
+                    if (isCorrectPwd(Password)) {
+                        Log.wtf("** VIDEOTECA **", "onActivityResult - Passwor Correcta, muestro peli");
+                        openFilm();
+                    } else {
+                        Toast.makeText(getContext(), "Contraseña Incorrecta", Toast.LENGTH_LONG).show();
+                        Log.wtf("** VIDEOTECA **", "onActivityResult - Passwor INCorrecta, muestro ERROR");
                     }
-                    else{
-                        Toast.makeText(getContext(), "No escribó contraseña", Toast.LENGTH_LONG).show();
-                    }
-                    break;
-                case SAVE_PWD:
-                    Log.wtf("** VIDEOTECA **", "onActivityResult - Guardo Password");
-                    savePasswordInPreferences(Password);
-                    break;
-            }
+                } else {
+                    Toast.makeText(getContext(), "No escribó contraseña", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case SAVE_PWD:
+                Log.wtf("** VIDEOTECA **", "onActivityResult - Guardo Password");
+                savePasswordInPreferences(Password);
+                break;
+        }
     }
 
-    private void myAlertDialog(String title, String message)
-    {
+    private void myAlertDialog(String title, String message) {
         final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
         alertBuilder.setMessage(message)
                 .setTitle(title);
