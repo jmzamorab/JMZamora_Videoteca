@@ -43,7 +43,7 @@ public class VideoContentProvider extends ContentProvider {
 
     private Cursor getSuggestions(String query) {
         query = query.toLowerCase();
-        String[] columns = new String[]{BaseColumns._ID, VideoDatabase.KEY_NAME, VideoDatabase.KEY_DATA_TYPE, VideoDatabase.KEY_ICON, VideoDatabase.KEY_PRODUCTION_YEAR, SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID};
+        String[] columns = new String[]{BaseColumns._ID, VideoDatabase.KEY_NAME, VideoDatabase.KEY_DESCRIPTION, VideoDatabase.KEY_DATA_TYPE, VideoDatabase.KEY_ICON, VideoDatabase.KEY_PRODUCTION_YEAR, SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID};
         return mVideoDatabase.getWordMatch(query, columns);
     }
 

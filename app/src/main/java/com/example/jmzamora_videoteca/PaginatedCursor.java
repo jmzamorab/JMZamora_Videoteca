@@ -43,7 +43,7 @@ public class PaginatedCursor extends AbstractCursor {
         mIntCacheIndexMap = new int[mColumnCount];
         mStringCacheIndexMap = new int[mColumnCount];
         mCursor.moveToFirst();
-        for (int i = 0; i < mColumnCount; i++) {
+        for (int i = 0; mRowCount > 0 && i < mColumnCount; i++) {
             int type = mCursor.getType(i);
             mColumnTypes[i] = type;
             switch (type) {

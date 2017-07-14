@@ -19,6 +19,7 @@ import java.util.HashMap;
 
 public class VideoDatabase {
     public static final String KEY_NAME = SearchManager.SUGGEST_COLUMN_TEXT_1;
+    public static final String KEY_DESCRIPTION = SearchManager.SUGGEST_COLUMN_TEXT_2;
     public static final String KEY_DATA_TYPE = SearchManager.SUGGEST_COLUMN_CONTENT_TYPE;
     public static final String KEY_PRODUCTION_YEAR = SearchManager.SUGGEST_COLUMN_PRODUCTION_YEAR;
     public static final String KEY_ICON = SearchManager.SUGGEST_COLUMN_RESULT_CARD_IMAGE;
@@ -40,6 +41,7 @@ public class VideoDatabase {
     private static HashMap<String, String> buildColumnMap() {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(KEY_NAME, KEY_NAME);
+        map.put(KEY_DESCRIPTION,KEY_DESCRIPTION);
         map.put(KEY_DATA_TYPE, KEY_DATA_TYPE);
         map.put(KEY_PRODUCTION_YEAR, KEY_PRODUCTION_YEAR);
         map.put(KEY_ICON, KEY_ICON);
@@ -56,8 +58,9 @@ public class VideoDatabase {
     }
 
     public Cursor getWordMatch(String query, String[] columns) {
-        String selection = KEY_NAME + " MATCH ?";
-        String[] selectionArgs = new String[]{query + "*"};
+      //  String selection = KEY_NAME + " MATCH ? ";
+        String selection = KEY_DESCRIPTION + " MATCH ?";
+        String[] selectionArgs = new String[]{"*"+  query + "*"};
         return query(selection, selectionArgs, columns);
     }
 
@@ -84,7 +87,7 @@ public class VideoDatabase {
             mHelperContext = context;
         }
 
-        private static final String FTS_TABLE_CREATE = "CREATE VIRTUAL TABLE " + FTS_VIRTUAL_TABLE + " USING fts3 (" + KEY_NAME + ", " + KEY_DATA_TYPE + "," + KEY_ICON + "," + KEY_PRODUCTION_YEAR + ");";
+        private static final String FTS_TABLE_CREATE = "CREATE VIRTUAL TABLE " + FTS_VIRTUAL_TABLE + " USING fts3 (" + KEY_NAME + ", " + KEY_DESCRIPTION + ", " + KEY_DATA_TYPE + "," + KEY_ICON + "," + KEY_PRODUCTION_YEAR + ");";
 
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -123,6 +126,7 @@ public class VideoDatabase {
         public long addMovie(Movie movie) {
             ContentValues initialValues = new ContentValues();
             initialValues.put(KEY_NAME, movie.getTitle());
+            initialValues.put(KEY_DESCRIPTION, movie.getDescription());
             initialValues.put(KEY_DATA_TYPE, "video/mp4");
             initialValues.put(KEY_PRODUCTION_YEAR, 2014);
             initialValues.put(KEY_ICON, movie.getCardImageUrl());

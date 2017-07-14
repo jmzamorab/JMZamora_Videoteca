@@ -150,7 +150,8 @@ public class FragmentPrincipal extends BrowseFragment {
         setOnSearchClickedListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Implementar la busqueda aquí", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
         });
     }
