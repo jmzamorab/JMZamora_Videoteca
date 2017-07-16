@@ -59,9 +59,16 @@ public class VideoDatabase {
 
     public Cursor getWordMatch(String query, String[] columns) {
       //  String selection = KEY_NAME + " MATCH ? ";
-        String selection = KEY_DESCRIPTION + " MATCH ?";
-        String[] selectionArgs = new String[]{"*"+  query + "*"};
-        return query(selection, selectionArgs, columns);
+        //Necesitaría un UNION, si hay tiempo
+        // revisar https://stackoverflow.com/questions/27280721/using-sqlitequerybuilder-buildunionsubquery-method
+        // SQLiteQueryBuilder buildUnionSubQuery() method
+
+
+        String selection = KEY_DESCRIPTION + " Like ?  ";
+        String[] selectionArgs = new String[]{"%"+  query + "%"};
+        //String[] selectionArgs = new String[]{"%"+  query + "%", query + "*"};
+
+            return query(selection, selectionArgs, columns);
     }
 
     private Cursor query(String selection, String[] selectionArgs, String[] columns) {
